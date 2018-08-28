@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Psychic-Game</title>
+</head>
+
+<body>
+    <h1>Psychic - Game</h1>
+    <h2> Guess what letter i'm thinking of...</h2>
+    <h3>
+        Wins:
+        <p id="wins"></p>
+    </h3>
+    <h3>Loses:
+        <p id="loses"></p>
+    </h3>
+    <h3>Guesses left:
+        <p id="guessLeft"></p>
+    </h3>
+    <h3>Letters Guesses:
+        <p id="guessed"></p>
+    </h3>
+</body>
+
+<script>
+
+    var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var wins = 0;
+    var loses = 0;
+    var guessesLeft = 9;
+    var guessedLetters = [];
+    var letterToGuess;
+
+    // Create variables that hold references to the places in the HTML where we want to display things.
+    var winsText = document.getElementById("wins");
+    var losesText = document.getElementById("loses");
+    var guessesLeftText = document.getElementById("guessLeft");
+    var guessedLettersText = document.getElementById("guessed");
+
+
+    startUp();
+
+    // This function is run whenever the user presses a key
+    document.onkeyup = function (event) {
+        var userGuess = event.key;
+
+        if (userGuess === letterToGuess) {
+            wins++;
+            resetGame();
+        }
+
+        if ((userGuess !== letterToGuess) && (guessesLeft - 1 === 0)) {
+            loses++;
+            resetGame();
+        }
+        else {
+            guessesLeft--;
+            guessedLetters.push(userGuess);
+        }
+
+        winsText.textContent = " " + wins;
+        losesText.textContent = " " + loses;
+        guessesLeftText.textContent = " " + guessesLeft;
+        guessedLettersText.textContent = guessedLetters;
+
+    }
+
+    function resetGame() {
+        guessesLeft = 9;
+        guessedLetters = [];
+        letterToGuess = letters[Math.floor(Math.random() * letters.length)];
+        console.log("Letter to Guess is " + letterToGuess);
+    }
+
+    function startUp() {
+        letterToGuess = letters[Math.floor(Math.random() * letters.length)];
+        console.log("Letter to Guess is " + letterToGuess);
+        winsText.textContent = " " + wins;
+        losesText.textContent = " " + loses;
+        guessesLeftText.textContent = " " + guessesLeft;
+        guessedLettersText.textContent = guessedLetters;
+
+    }
+
+
+</script>
+
+</body>
+
+</html>
