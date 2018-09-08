@@ -43,15 +43,13 @@
     startUp();
 
     // This function is run whenever the user presses a key
-    document.onkeyup = function (event) {
+    document.onkeydown = function (event) {
         var userGuess = event.key;
 
         if (userGuess === letterToGuess) {
             wins++;
             resetGame();
-        }
-
-        if ((userGuess !== letterToGuess) && (guessesLeft - 1 === 0)) {
+        } else if ((userGuess !== letterToGuess) && (guessesLeft - 1 === 0)) {
             loses++;
             resetGame();
         }
